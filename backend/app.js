@@ -21,28 +21,41 @@ const schema = buildSchema(`
     password: String
   }
 
+  type Product {
+    id: Int
+    createdAt: String
+    updatedAt: String
+    name: String
+    ownerEmail: String
+    owner: User
+    bought: Boolean
+    sold: Boolean
+    rented: Boolean
+    categories: [String]
+  }
+  
+  type Category {
+    id: Int
+    name: String
+  }
+
   type Query {
     getUser(id: ID!): User
+    getAllProducts: [Product]
+    getProduct(id: Int!): Product
   }
 
   type Mutation {
     signupUser(name: String!, email: String!, password: String!): User
     signinUser(email: String!, password: String!): User
+    
+    createProduct(name: String, ownerEmail: String,catagories:[String]) : Product
+    updateProduct(name: String, ownerEmail: String,catagories:[String]) : Product
   }
   
 `)
 
 
-class Message {
-  constructor(id, { content, author }) {
-    this.id = id
-    this.content = content
-    this.author = author
-  }
-}
-
-var fakeDatabase = {}
-// resolver function for each api endpoint
 const root = {
 
   signupUser: async ({ name, email, password }) => {
@@ -72,6 +85,16 @@ const root = {
     return user;
   },
 
+  createProduct: async({name,ownerEmail,categoryList})=>{
+    const createPostAndCategory = await prisma.product.create({
+      data: {
+        name: name,
+        ownerEmail:ownerEmail,
+        categories: categoryList,
+      },
+    })
+    return createPostAndCategory
+  }
   
 }
 
