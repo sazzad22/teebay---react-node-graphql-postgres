@@ -1,21 +1,24 @@
 {
-  "name": "backend",
+  "name": "teebay_backend",
+  "type": "module",
   "version": "1.0.0",
-  "description": "teebay backend",
+  "description": "teebay backend with graphql prisma",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./index"
   },
   "author": "sazzad",
   "license": "ISC",
   "dependencies": {
     "@prisma/client": "^5.13.0",
+    "bcryptjs": "^2.4.3",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
-    "node": "^20.13.1"
-  },
-  "devDependencies": {
+    "graphql": "^16.8.1",
+    "graphql-http": "^1.22.1",
     "nodemon": "^3.1.0",
-    "prisma": "^5.13.0"
+    "prisma": "^5.13.0",
+    "ruru": "^2.0.0-beta.11"
   }
 }
