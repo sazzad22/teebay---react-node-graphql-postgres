@@ -48,9 +48,9 @@ const schema = buildSchema(`
   type Mutation {
     signupUser(name: String!, email: String!, password: String!): User
     signinUser(email: String!, password: String!): User
-    
+
     createProduct(name: String, ownerEmail: String,catagories:[String]) : Product
-    updateProduct(name: String, ownerEmail: String,catagories:[String]) : Product
+    updateProduct(id:Int!,name: String, ownerEmail: String,catagories:[String],bought: Boolean,sold: Boolean,rented: Boolean) : Product
   }
   
 `)
@@ -85,16 +85,37 @@ const root = {
     return user;
   },
 
-  createProduct: async({name,ownerEmail,categoryList})=>{
-    const createPostAndCategory = await prisma.product.create({
+  createProduct: async({name,ownerEmail,catagories})=>{
+    const createPost = await prisma.product.create({
       data: {
         name: name,
         ownerEmail:ownerEmail,
-        categories: categoryList,
+        categories: catagories,
       },
+    })
+    return createPost
+  },
+
+  updateProduct: async({id,name,ownerEmail,catagories,bought,sold,rented})=>{
+    console.log(catagories)
+    const createPostAndCategory = await prisma.product.update({
+      where:{
+        id:id
+      },
+      data: {
+        name: name,
+        ownerEmail:ownerEmail,
+        categories: catagories,
+        bought: bought,
+        sold: sold,
+        rented: rented
+      },
+
     })
     return createPostAndCategory
   }
+
+  
   
 }
 
