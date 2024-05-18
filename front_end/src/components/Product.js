@@ -25,6 +25,9 @@ const Product = ({product}) => {
           </div>
           <p>{product?.name}</p>
           <p>product description </p>
+          <p>{product?.categories}</p>
+          <p>{product?.name}</p>
+
         </div>
       </div>
     </div>

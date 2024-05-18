@@ -42,27 +42,7 @@ const AllProducts = () => {
   if (data?.getAllProducts) {
     console.log(data.getAllProducts);
   }
-  const products = [
-    {
-      name: "iPhone 13 pro max",
-      category: "Electronics",
-      price: 1300,
-      description:
-        "Lorem in hac habitasse platea dictumst. Sed at tempus risus. Sed at perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo.",
-      date: "21st Sep 2021",
-      id: "1023934712",
-    },
-    {
-      name: "iPhone 13 pro slightly broken",
-      category: "Electronics",
-      price: 700,
-      description:
-        "Lorem in hac habitasse platea dictumst. Sed at perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo.",
-      date: "21st Sep 2018",
-    },
-  ];
 
-  
 
   return (
     <div>
