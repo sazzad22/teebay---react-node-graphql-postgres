@@ -6,6 +6,8 @@ import root from "./graphql/root_resolvers.js";
 import { randomBytes } from "crypto";
 import bcrypt from "bcryptjs"
 import {prisma} from "./db/prisma.js";
+import moduleName from 'module';
+import cors from "cors"
 
 //Imports
 // const schema = require("./schema/schema");
@@ -22,7 +24,7 @@ import express from "express"
 
 
 const app = express();
-
+app.use(cors());
 
 app.all(
   "/graphql",

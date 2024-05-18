@@ -27,17 +27,18 @@ const schema = buildSchema(`
     id: Int
     name: String
   }
-
+  
   type Query {
-    getUser(id: ID!): User
+    signinUser(email: String!, password: String!): User
+
     getAllProducts: [Product]
+    getAllCatagories: [Category]
     getProductsOfUser(ownerEmail: String!): [Product]
     getProduct(id: Int!): Product
   }
 
   type Mutation {
     signupUser(name: String!, email: String!, password: String!): User
-    signinUser(email: String!, password: String!): User
 
     createProduct(name: String, ownerEmail: String,catagories:[String]) : Product
     updateProduct(id:Int!,name: String, ownerEmail: String,catagories:[String],bought: Boolean,sold: Boolean,rented: Boolean) : Product

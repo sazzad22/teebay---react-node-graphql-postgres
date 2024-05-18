@@ -1,29 +1,30 @@
 import { 
-    signupUserResolver,
-    signinUserResolver } from "../controllers/user.controller.js";
+    signupUser,
+    signinUser } from "../controllers/user.controller.js";
 
 import { 
-    createProductResolver,
-    updateProductResolver,
-    getAllProductsResolver,
+    createProduct,
+    updateProduct,
+    getAllProducts,
+    getAllCatagories
  } from "../controllers/product.controller.js";
 import {prisma} from "../db/prisma.js";
 
 
 const root = {
 
-    signupUser: signupUserResolver,
+    signupUser,
   
-    signinUser: signinUserResolver,
+    signinUser,
   
-    createProduct: createProductResolver,
+    createProduct,
   
-    updateProduct: updateProductResolver,
+    updateProduct,
 
-    getAllProducts: getAllProductsResolver
+    getAllProducts,
   
     
-    
+    getAllCatagories
   }
 
   export default root

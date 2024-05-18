@@ -1,6 +1,6 @@
 import { prisma } from "../db/prisma.js";
 
-const createProductResolver = async ({ name, ownerEmail, catagories }) => {
+const createProduct = async ({ name, ownerEmail, catagories }) => {
   const createPost = await prisma.product.create({
     data: {
       name: name,
@@ -11,7 +11,7 @@ const createProductResolver = async ({ name, ownerEmail, catagories }) => {
   return createPost;
 };
 
-const updateProductResolver = async ({
+const updateProduct = async ({
   id,
   name,
   ownerEmail,
@@ -37,13 +37,39 @@ const updateProductResolver = async ({
   return createPostAndCategory;
 };
 
-const getAllProductsResolver = async () => {
+const getAllProducts = async () => {
  const allProducts = await prisma.product.findMany()
  console.log("allProducts",allProducts)
  return allProducts
 };
+
+const getAllCatagories = async () => {
+ const allcategories = await prisma.category.findMany()
+ console.log("allcategories",allcategories)
+ return allcategories
+};
+
+const getProductsOfUser = async ({}) => {
+ const allProducts = await prisma.product.findMany()
+ console.log("allProducts",allProducts)
+ return allProducts
+};
+
+const deleteOneProduct = async ({id}) => {
+ const allProducts = await prisma.product.delete({
+  where:{
+    id:id
+  }
+ })
+ console.log("allProducts",allProducts)
+ return allProducts
+};
+
+
 export { 
-  createProductResolver, 
-  updateProductResolver,
-  getAllProductsResolver
+  createProduct, 
+  updateProduct,
+  getAllProducts,
+  getProductsOfUser,
+  getAllCatagories
  };
