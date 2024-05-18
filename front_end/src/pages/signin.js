@@ -1,16 +1,41 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import { gql, useLazyQuery } from "@apollo/client";
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+
+
+const signInUser = gql`
+  query SigninUser($email:String! ,$password:String!) {
+    signinUser(email: $email, password: $password) {
+      id
+      name
+      email
+      password
+    }
+  }
+`;
 
 const Signin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const handleSubmit = (e) => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [runSignInUser, { loading, error, data }] = useLazyQuery(signInUser);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // You can add your GraphQL API call here to authenticate the user
-    console.log("Email:", email);
-    console.log("Password:", password);
+    if (email && password) {
+      console.log(email,password)
+      await runSignInUser({ variables: { email, password } });
+    }
+    if (data?.signinUser){
+      navigate("/")
+    }
   };
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
 
   //   const {
   //     register,
@@ -135,6 +160,7 @@ const Signin = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              required
             />
           </div>
           <div className="mb-6">
@@ -144,6 +170,7 @@ const Signin = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              required
             />
           </div>
           <div className="flex items-center justify-between">
@@ -155,12 +182,12 @@ const Signin = () => {
             </button>
           </div>
         </form>
-        <p className="text-sm text-gray-600 mt-4">
+        {/* <p className="text-sm text-gray-600 mt-4">
           Don't have an account?{" "}
           <a href="#" className="text-blue-500 hover:text-blue-800">
             Signup
           </a>
-        </p>
+        </p> */}
       </div>
     </div>
   );
